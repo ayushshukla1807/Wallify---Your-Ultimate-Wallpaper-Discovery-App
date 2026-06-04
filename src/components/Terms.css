@@ -1,0 +1,85 @@
+.terms-page-container {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(7, 7, 7, 0.97), rgba(11, 11, 11, 0.97)),
+        url('../assets/gridbackground.jpg') center/550px repeat;
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+.terms-page-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    animation: subtleFloat 60s linear infinite;
+    background: inherit;
+    z-index: -1;
+}
+
+.terms-page-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.terms-page-content h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.terms-content {
+    color: #bdbdbd;
+    line-height: 1.6;
+}
+
+.terms-content p {
+    margin-bottom: 1.5rem;
+}
+
+.terms-content ol {
+    margin: 0 0 1.5rem 1.5rem;
+    padding: 0;
+}
+
+.terms-content li {
+    margin-bottom: 1rem;
+}
+
+.terms-content strong {
+    color: #fff;
+}
+
+@keyframes subtleFloat {
+    0% {
+        background-position: center;
+    }
+
+    100% {
+        background-position: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .terms-page-container {
+        padding: 2rem 1rem;
+    }
+
+    .terms-page-content {
+        padding: 2rem;
+    }
+
+    .terms-page-content h1 {
+        font-size: 2rem;
+    }
+}

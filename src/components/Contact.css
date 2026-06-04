@@ -1,0 +1,233 @@
+.contact-container {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(7, 7, 7, 0.97), rgba(11, 11, 11, 0.97)),
+        url('../assets/gridbackground.jpg') center/550px repeat;
+    padding: 4rem 2rem;
+    margin: 0;
+    position: relative;
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.contact-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    animation: subtleFloat 60s linear infinite;
+    background: inherit;
+    z-index: -1;
+}
+
+@keyframes subtleFloat {
+    0% {
+        background-position: center;
+    }
+
+    100% {
+        background-position: center;
+    }
+}
+
+.contact-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 1;
+}
+
+.contact-info {
+    color: #fff;
+}
+
+.contact-info h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+.contact-section {
+    margin-bottom: 2rem;
+}
+
+.contact-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.contact-section p {
+    color: #bdbdbd;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.contact-section a {
+    color: #6c63ff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.contact-section a:hover {
+    color: #5548c8;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: #bdbdbd;
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+
+.social-links a:hover {
+    color: #6c63ff;
+}
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.9rem 1.1rem;
+    background: #2d293b;
+    border: 1.5px solid #44405a;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #6c63ff;
+}
+
+.phone-input {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.country-code {
+    padding: 0.9rem;
+    background: #2d293b;
+    border: 1.5px solid #44405a;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin-top: 0.3rem;
+}
+
+.checkbox-group label {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #bdbdbd;
+    line-height: 1.4;
+}
+
+.checkbox-group a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+.checkbox-group a:hover {
+    text-decoration: underline;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-btn:hover {
+    background: #5548c8;
+}
+
+@media (max-width: 968px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .contact-container {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-content {
+        padding: 1.5rem;
+    }
+}
