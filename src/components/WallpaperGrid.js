@@ -48,23 +48,33 @@ function WallpaperGrid({ wallpapers, lastWallpaperRef }) {
         }
     };
 
+    // Copy Link handler
+    const handleCopyLink = async (url) => {
+        try {
+            await navigator.clipboard.writeText(url);
+            alert('Link copied to clipboard!');
+        } catch (err) {
+            alert('Failed to copy link.');
+        }
+    };
+
     if (!wallpapers.length) {
         return <p>No wallpapers found.</p>;
     }
 
     return (
         <>
-            <div className="masonry-wrapper">
+            <div className="sp-masonry-wrapper">
                 <Masonry
                     breakpointCols={breakpointColumns}
-                    className="masonry-grid"
-                    columnClassName="masonry-grid_column"
+                    className="sp-masonry-grid"
+                    columnClassName="sp-masonry-grid_column"
                 >
                     {wallpapers.map((wallpaper, index) => (
                         <div
                             key={wallpaper.id}
                             ref={index === wallpapers.length - 1 ? lastWallpaperRef : null}
-                            className="masonry-grid_item"
+                            className="sp-masonry-grid_item"
                         >
                             <WallpaperCard
                                 wallpaper={wallpaper}
@@ -76,20 +86,28 @@ function WallpaperGrid({ wallpapers, lastWallpaperRef }) {
             </div>
 
             {modalWallpaper && (
-                <div className="preview-modal-backdrop" onClick={handleClose}>
-                    <div className="preview-modal" onClick={e => e.stopPropagation()}>
+                <div className="sp-preview-modal-backdrop" onClick={handleClose}>
+                    <div className="sp-preview-modal" onClick={e => e.stopPropagation()}>
                         <img
                             src={modalWallpaper.urls.full}
                             alt={modalWallpaper.alt_description || 'Wallpaper'}
-                            className="preview-modal-img"
+                            className="sp-preview-modal-img"
                         />
-                        <button
-                            className="preview-modal-download"
-                            onClick={() => handleDownload(modalWallpaper.urls.full, `wallify-${modalWallpaper.id}.jpg`)}
-                        >
-                            Download
-                        </button>
-                        <button className="close-modal-btn" onClick={handleClose}>
+                        <div className="sp-preview-modal-actions">
+                            <button
+                                className="sp-preview-modal-download"
+                                onClick={() => handleDownload(modalWallpaper.urls.full, `wallify-${modalWallpaper.id}.jpg`)}
+                            >
+                                Download
+                            </button>
+                            <button
+                                className="sp-preview-modal-copy"
+                                onClick={() => handleCopyLink(modalWallpaper.urls.full)}
+                            >
+                                Copy Link
+                            </button>
+                        </div>
+                        <button className="sp-close-modal-btn" onClick={handleClose}>
                             Close
                         </button>
                     </div>

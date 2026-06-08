@@ -40,20 +40,20 @@ function FavoritesPage() {
     }, []);
 
     return (
-        <div className="search-page">
-            <h1>Your Favorite Wallpapers</h1>
+        <div className="sp-search-page">
+            <h1 className="sp-search-title">Your Favorite Wallpapers</h1>
             {loading ? (
-                <div className="loading-spinner">
+                <div className="sp-loading-spinner">
                     <div className="spinner"></div>
                 </div>
             ) : error ? (
-                <div className="error">{error}</div>
+                <div className="sp-error">{error}</div>
             ) : favoriteWallpapers.length === 0 ? (
-                <div className="no-favorites">
+                <div className="sp-no-results">
                     <span role="img" aria-label="empty heart">💔</span>
                     <p>
                         No favorites yet.<br />
-                        Click the <span className="heart-highlight">heart</span> on any wallpaper to save it here!
+                        Click the <span style={{color: '#ff4b5c'}}>heart</span> on any wallpaper to save it here!
                     </p>
                 </div>
             ) : (

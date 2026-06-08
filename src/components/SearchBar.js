@@ -143,40 +143,41 @@ function SearchBar({ setQuery }) {
     const items = input.trim() ? suggestions : recentSearches;
 
     return (
-        <div className="search-container" ref={searchContainerRef}>
-            <form onSubmit={handleSubmit} className="search-bar">
+        <div className="sp-search-container" ref={searchContainerRef}>
+            <form onSubmit={handleSubmit} className="sp-search-bar">
                 <input
                     type="text"
-                    placeholder="Search wallpapers..."
+                    placeholder="Search stunning wallpapers..."
                     value={input}
                     onChange={handleInputChange}
                     onFocus={handleInputFocus}
                     onKeyDown={handleKeyDown}
+                    className="sp-search-input"
                 />
-                <button type="submit">Search</button>
+                <button type="submit" className="sp-search-button">Search</button>
             </form>
             {showRecentSearches && hasContentToShow && (
-                <div className="recent-searches">
+                <div className="sp-recent-searches">
                     {input.trim() && suggestions.length > 0 ? (
                         <>
-                            <div className="recent-searches-header">
-                                <div className="recent-searches-title">
+                            <div className="sp-recent-searches-header">
+                                <div className="sp-recent-searches-title">
                                     <FaSearch />
                                     <span>Suggestions</span>
                                 </div>
                                 <button
-                                    className="clear-recent-searches"
+                                    className="sp-clear-recent-searches"
                                     onClick={() => setShowRecentSearches(false)}
                                     title="Close suggestions"
                                 >
                                     <FaTimes />
                                 </button>
                             </div>
-                            <div className="recent-searches-list">
+                            <div className="sp-recent-searches-list">
                                 {suggestions.map((suggestion, index) => (
                                     <button
                                         key={index}
-                                        className={`recent-search-item ${selectedIndex === index ? 'selected' : ''}`}
+                                        className={`sp-recent-search-item ${selectedIndex === index ? 'selected' : ''}`}
                                         onClick={() => handleSuggestionClick(suggestion)}
                                     >
                                         {highlightMatch(suggestion)}
@@ -186,24 +187,24 @@ function SearchBar({ setQuery }) {
                         </>
                     ) : !input.trim() && recentSearches.length > 0 ? (
                         <>
-                            <div className="recent-searches-header">
-                                <div className="recent-searches-title">
+                            <div className="sp-recent-searches-header">
+                                <div className="sp-recent-searches-title">
                                     <FaHistory />
                                     <span>Recent Searches</span>
                                 </div>
                                 <button
-                                    className="clear-recent-searches"
+                                    className="sp-clear-recent-searches"
                                     onClick={clearRecentSearches}
                                     title="Clear recent searches"
                                 >
                                     <FaTimes />
                                 </button>
                             </div>
-                            <div className="recent-searches-list">
+                            <div className="sp-recent-searches-list">
                                 {recentSearches.map((search, index) => (
                                     <button
                                         key={index}
-                                        className={`recent-search-item ${selectedIndex === index ? 'selected' : ''}`}
+                                        className={`sp-recent-search-item ${selectedIndex === index ? 'selected' : ''}`}
                                         onClick={() => handleSuggestionClick(search)}
                                     >
                                         {search}

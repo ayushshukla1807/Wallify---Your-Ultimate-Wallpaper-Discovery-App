@@ -1,8 +1,6 @@
 .contact-container {
     min-height: 100vh;
-    background:
-        linear-gradient(rgba(7, 7, 7, 0.97), rgba(11, 11, 11, 0.97)),
-        url('../assets/gridbackground.jpg') center/550px repeat;
+    background: #0a0a0f;
     padding: 4rem 2rem;
     margin: 0;
     position: relative;
@@ -11,40 +9,19 @@
     right: 0;
 }
 
-.contact-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    animation: subtleFloat 60s linear infinite;
-    background: inherit;
-    z-index: -1;
-}
-
-@keyframes subtleFloat {
-    0% {
-        background-position: center;
-    }
-
-    100% {
-        background-position: center;
-    }
-}
-
 .contact-content {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 4rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(20, 20, 25, 0.7);
     border-radius: 24px;
     padding: 3rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     position: relative;
     z-index: 1;
 }

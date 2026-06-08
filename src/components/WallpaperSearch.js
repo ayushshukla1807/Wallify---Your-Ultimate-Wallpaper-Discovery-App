@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import ArrowDownIcon from './ArrowDownIcon';
 import { FaDice } from 'react-icons/fa';
 import { UNSPLASH_ACCESS_KEY } from '../config';
+import './SearchPage.css';
 
 function WallpaperSearch() {
     const location = useLocation();
@@ -109,30 +110,30 @@ function WallpaperSearch() {
     };
 
     return (
-        <div className="search-page">
-            <h1>Explore Wallpapers</h1>
+        <div className="sp-search-page">
+            <h1 className="sp-search-title">Explore Wallpapers</h1>
             <SearchBar setQuery={handleSearch} />
             {mode === 'search' && (
-                <button className="explore-random-btn" onClick={handleShowRandom} aria-label="Explore Random Wallpapers">
+                <button className="sp-explore-random-btn" onClick={handleShowRandom} aria-label="Explore Random Wallpapers">
                     <FaDice size={28} />
                 </button>
             )}
-            {error && <div className="error">{error}</div>}
+            {error && <div className="sp-error">{error}</div>}
             {loading && !wallpapers.length ? (
-                <div className="loading-spinner">
+                <div className="sp-loading-spinner">
                     <div className="spinner"></div>
                 </div>
             ) : !loading && !wallpapers.length ? (
-                <p>No wallpapers found.</p>
+                <p className="sp-no-results">No wallpapers found.</p>
             ) : (
                 <>
                     <WallpaperGrid wallpapers={wallpapers} />
-                    {loading && <div className="loading-spinner"><div className="spinner"></div></div>}
+                    {loading && <div className="sp-loading-spinner"><div className="spinner"></div></div>}
                 </>
             )}
             {hasMore && !loading && (
                 <button
-                    className="add-more-arrow-btn"
+                    className="sp-add-more-arrow-btn"
                     onClick={handleAddMore}
                     disabled={loading}
                     aria-label="Show more wallpapers"

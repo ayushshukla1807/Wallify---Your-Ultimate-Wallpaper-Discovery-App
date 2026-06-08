@@ -22,7 +22,6 @@ body {
   flex-direction: column;
 }
 
-/* Header Styles */
 .header {
   background:
     linear-gradient(rgba(4, 4, 4, 0.97), rgba(4, 4, 4, 0.97)),
@@ -32,7 +31,8 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header-content {

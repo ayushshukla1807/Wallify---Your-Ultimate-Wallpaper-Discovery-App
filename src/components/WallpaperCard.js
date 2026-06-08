@@ -30,20 +30,20 @@ function WallpaperCard({ wallpaper, onPreview }) {
     };
 
     return (
-        <div className={`wallpaper-card ${isPortrait ? 'portrait' : 'landscape'}`}>
+        <div className={`sp-wallpaper-card ${isPortrait ? 'portrait' : 'landscape'}`}>
             <img
                 src={wallpaper.urls.regular}
                 alt={wallpaper.alt_description || 'Wallpaper'}
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                className="sp-wallpaper-img"
             />
             <button
-                className="heart-btn"
+                className="sp-heart-btn"
                 onClick={toggleHeart}
                 aria-label={isHearted ? 'Remove from favorites' : 'Add to favorites'}
             >
                 <svg
-                    className={`heart-shape ${isHearted ? 'hearted' : ''}`}
+                    className={`sp-heart-shape ${isHearted ? 'hearted' : ''}`}
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                 >
@@ -51,12 +51,12 @@ function WallpaperCard({ wallpaper, onPreview }) {
                 </svg>
             </button>
             <button
-                className="preview-btn"
+                className="sp-preview-btn"
                 onClick={() => onPreview(wallpaper)}
             >
                 Preview
             </button>
-            <div className="resolution-info">
+            <div className="sp-resolution-info">
                 {formatResolution(wallpaper.width, wallpaper.height)}
             </div>
         </div>

@@ -1,37 +1,13 @@
 import React, { useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import { FaTimes } from 'react-icons/fa';
 
 const categories = [
-    'Nature',
-    'Animals',
-    'Architecture',
-    'Food & Drink',
-    'People',
-    'Technology',
-    'Travel',
-    'Art',
-    'Sports',
-    'Abstract',
-    'Space',
-    'Minimal',
-    'Dark',
-    'City',
-    'Ocean',
-    'Mountains',
-    'Flowers',
-    'Sunset',
-    'Night',
-    'Forest',
-    'Desert',
-    'Beach',
-    'Winter',
-    'Autumn',
-    'Summer',
-    'Spring',
-    'Gaming',
-    'Music',
-    'Fashion',
-    'Cars'
+    'Nature', 'Animals', 'Architecture', 'Food & Drink', 'People',
+    'Technology', 'Travel', 'Art', 'Sports', 'Abstract', 'Space',
+    'Minimal', 'Dark', 'City', 'Ocean', 'Mountains', 'Flowers',
+    'Sunset', 'Night', 'Forest', 'Desert', 'Beach', 'Winter',
+    'Autumn', 'Summer', 'Spring', 'Gaming', 'Music', 'Fashion', 'Cars'
 ];
 
 function CategoryPopup({ onSelectCategory, onClose }) {
@@ -50,7 +26,7 @@ function CategoryPopup({ onSelectCategory, onClose }) {
         };
     }, [onClose]);
 
-    return (
+    return ReactDOM.createPortal(
         <div className="category-popup-overlay">
             <div className="category-popup" ref={popupRef}>
                 <div className="category-popup-header">
@@ -71,8 +47,9 @@ function CategoryPopup({ onSelectCategory, onClose }) {
                     ))}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 }
 
-export default CategoryPopup; 
+export default CategoryPopup;
