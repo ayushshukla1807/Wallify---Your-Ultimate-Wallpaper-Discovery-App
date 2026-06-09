@@ -140,7 +140,6 @@ function SearchBar({ setQuery }) {
     const suggestions = getSuggestions();
     const hasContentToShow = (input.trim() && suggestions.length > 0) ||
         (!input.trim() && recentSearches.length > 0);
-    const items = input.trim() ? suggestions : recentSearches;
 
     return (
         <div className="sp-search-container" ref={searchContainerRef}>
