@@ -9,17 +9,6 @@ function Footer() {
                 <div className="footer-section">
                     <h3>Wallify</h3>
                     <p>Find the perfect wallpaper for your device</p>
-                    <div className="social-links">
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link">
-                            <FaGithub />
-                        </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">
-                            <FaTwitter />
-                        </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">
-                            <FaInstagram />
-                        </a>
-                    </div>
                 </div>
 
                 <div className="footer-section">

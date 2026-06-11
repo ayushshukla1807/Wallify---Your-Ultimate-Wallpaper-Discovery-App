@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FaFacebook, FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
 import './Contact.css';
 
 function Contact() {
@@ -62,7 +61,7 @@ function Contact() {
                         <p><a href="tel:+995555555555">(+91) 98765XXXXX</a></p>
                     </div>
 
-                    <div className="contact-section">
+                    {/* <div className="contact-section">
                         <h3>Social media</h3>
                         <div className="social-links">
                             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
@@ -78,7 +77,7 @@ function Contact() {
                                 <FaTwitter />
                             </a>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 <form className="contact-form" onSubmit={handleSubmit}>
@@ -139,10 +138,10 @@ function Contact() {
                         <label htmlFor="phoneNumber">Phone Number</label>
                         <div className="phone-input">
                             <select className="country-code">
-                                <option value="+44">🇬🇧 +44</option>
-                                <option value="+1">🇺🇸 +1</option>
-                                <option value="+995">🇬🇪 +995</option>
-                                <option value="+91">🇮🇳 +91</option>
+                                <option value="+91">IN +91</option>
+                                <option value="+1">US +1</option>
+                                <option value="+995">GE +995</option>
+                                <option value="+44">GB +44</option>
                             </select>
                             <input
                                 type="tel"
@@ -164,7 +163,7 @@ function Contact() {
                             value={formData.message}
                             onChange={handleChange}
                             required
-                            placeholder="Tell us what we can help you with"
+                            placeholder="Tell us what you need help with"
                             rows="4"
                         />
                     </div>

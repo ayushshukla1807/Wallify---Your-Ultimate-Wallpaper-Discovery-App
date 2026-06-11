@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { auth } from '../firebase';
 import logo from '../assets/logo.png';
 import { FaThLarge } from 'react-icons/fa';
 import CategoryPopup from './CategoryPopup';
 
 function Header() {
-    const { currentUser } = useAuth();
     const navigate = useNavigate();
     const [showCategories, setShowCategories] = useState(false);
-
-    const handleLogout = async () => {
-        await auth.signOut();
-        navigate('/login');
-    };
-
     const handleExploreClick = (e) => {
         e.preventDefault();
         navigate('/', { replace: true });
@@ -60,16 +51,6 @@ function Header() {
                     </button>
                     <Link to="/favorites" className="nav-link">Favorites</Link>
                     <Link to="/contact" className="nav-link">Contact</Link>
-                    {currentUser ? (
-                        <div className="user-section">
-                            <span className="user-name">{currentUser.displayName || 'User'}</span>
-                            <button className="nav-link logout-btn" onClick={handleLogout}>
-                                Logout
-                            </button>
-                        </div>
-                    ) : (
-                        <Link to="/auth" className="nav-link">Login / Signup</Link>
-                    )}
                 </nav>
             </div>
             {showCategories && (
