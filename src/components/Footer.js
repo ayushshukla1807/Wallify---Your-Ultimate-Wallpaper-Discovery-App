@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaGithub, FaTwitter, FaInstagram, FaEnvelope } from 'react-icons/fa';
+import { FaEnvelope } from 'react-icons/fa';
 
 function Footer() {
     return (
@@ -17,7 +17,6 @@ function Footer() {
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/search">Explore</Link></li>
                         <li><Link to="/favorites">Favorites</Link></li>
-                        <li><Link to="/auth">Login / Signup</Link></li>
                         <li><Link to="/contact">Contact</Link></li>
                     </ul>
                 </div>
