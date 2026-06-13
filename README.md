@@ -1,44 +1,37 @@
-# Wallify - Your Ultimate Wallpaper Discovery Platform
+# Wallify - Your Ultimate Wallpaper Discovery App
 
-![Wallify Logo](src/assets/logo.png)
+![Wallify Logo](assets/images/icon.png)
 
-Wallify is a modern web application that helps users discover and download high-quality wallpapers for their devices. Built with React and powered by the Unsplash API, Wallify offers a seamless experience for finding the perfect wallpaper.
+Wallify is a modern mobile application that helps users discover and download high-quality wallpapers for their devices. Built with React Native, Expo, and powered by the Unsplash API, Wallify offers a seamless experience for finding the perfect wallpaper.
 
 ## ✨ Features
 
 - 🔍 **Smart Search**: Find wallpapers using keywords and categories
-- 🎲 **Random Discovery**: Explore random wallpapers with a single click
-- ❤️ **Favorites**: Save your favorite wallpapers for later
-- 📱 **Responsive Design**: Works perfectly on all devices
-- 🎨 **Beautiful UI**: Modern and intuitive user interface
-- 🔒 **User Authentication**: Secure login and signup system
-- 📥 **Easy Download**: One-click download functionality
-- 🖼️ **High Resolution**: Access to high-quality wallpapers
-
-## 🚀 Live Demo
-
-Visit [Wallify](https://wallify.vercel.app) to experience the application.
+- 🎲 **Discovery**: Explore random beautiful wallpapers on the Home screen
+- ❤️ **Favorites**: Save your favorite wallpapers locally to view them later
+- 📱 **Mobile Native**: Built with Expo Router for fluid navigation and performance
+- 🎨 **Beautiful UI**: Modern and intuitive user interface with Masonry layouts
+- 🖼️ **High Resolution**: Access to high-quality wallpapers directly from Unsplash
 
 ## 🛠️ Technologies Used
 
-- React.js
-- Firebase Authentication
+- React Native
+- Expo & Expo Router
 - Unsplash API
-- CSS3 with modern features
-- React Router for navigation
-- React Icons
-- Responsive Design
+- AsyncStorage for local favorites
+- `@react-native-seoul/masonry-list` for beautiful grids
+- `@expo/vector-icons` for scalable vector icons
 
 ## 🏗️ Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/wallify.git
+   git clone https://github.com/ayushshukla1807/Wallify---Your-Ultimate-Wallpaper-Discovery-App.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd wallify
+   cd Wallify
    ```
 
 3. Install dependencies:
@@ -46,46 +39,26 @@ Visit [Wallify](https://wallify.vercel.app) to experience the application.
    npm install
    ```
 
-4. Create a `.env` file in the root directory and add your Unsplash API key:
-   ```
-   REACT_APP_UNSPLASH_ACCESS_KEY=your_unsplash_api_key
-   ```
-
-5. Start the development server:
+4. Run the Expo development server:
    ```bash
-   npm start
+   npx expo start
    ```
 
-## 🔧 Configuration
-
-1. Get your Unsplash API key from [Unsplash Developers](https://unsplash.com/developers)
-2. Set up Firebase project and add configuration in `src/firebase.js`
-3. Update the environment variables as needed
+5. Open the app:
+   - Use the **Expo Go** app on your iOS or Android device to scan the QR code.
+   - Or press `i` to open in iOS Simulator / `a` for Android Emulator.
 
 ## 📱 Usage
 
-1. **Search Wallpapers**:
-   - Use the search bar to find specific wallpapers
-   - Browse through categories
-   - Click the dice icon for random wallpapers
-
-2. **Save Favorites**:
-   - Click the heart icon to save wallpapers
-   - Access your favorites from the Favorites page
-
-3. **Download Wallpapers**:
-   - Click the download button on any wallpaper
-   - Preview wallpapers before downloading
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. **Discover Wallpapers**:
+   - The Home tab displays a curated Masonry grid of random stunning wallpapers.
+   
+2. **Search Wallpapers**:
+   - Navigate to the Search tab to find specific wallpapers by keyword.
+   
+3. **Save Favorites**:
+   - Tap the heart icon on any wallpaper to save it locally.
+   - Access all your saved wallpapers in the Favorites tab.
 
 ## 📄 License
 
@@ -94,15 +67,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - [Unsplash](https://unsplash.com) for providing the wallpaper API
-- [React Icons](https://react-icons.github.io/react-icons/) for the beautiful icons
-- All contributors who have helped shape this project
+- Expo team for the incredible React Native framework
 
 ## 📞 Contact
 
 For any queries or support, please reach out to:
-- Email: support@wallify.com
-- GitHub: [Your GitHub Profile]
+- GitHub: [Ayush Shukla](https://github.com/ayushshukla1807)
 
 ---
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by Ayush Shukla
