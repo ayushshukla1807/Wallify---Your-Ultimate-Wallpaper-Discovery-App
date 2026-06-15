@@ -1,9 +1,17 @@
-import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, Text, SafeAreaView, Dimensions, TouchableOpacity, Image } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFocusEffect } from 'expo-router';
-import MasonryGrid from '../../components/MasonryGrid';
+import React, { useState, useCallback } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  Dimensions,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "expo-router";
+import MasonryGrid from "../../components/MasonryGrid";
 
 export default function FavoritesScreen() {
   const [favorites, setFavorites] = useState([]);
@@ -11,12 +19,12 @@ export default function FavoritesScreen() {
   useFocusEffect(
     useCallback(() => {
       loadFavorites();
-    }, [])
+    }, []),
   );
 
   const loadFavorites = async () => {
     try {
-      const stored = await AsyncStorage.getItem('wallify_favorites_objs');
+      const stored = await AsyncStorage.getItem("wallify_favorites_objs");
       if (stored) {
         setFavorites(JSON.parse(stored));
       } else {
@@ -24,23 +32,26 @@ export default function FavoritesScreen() {
         setFavorites([]);
       }
     } catch (e) {
-      console.error('Failed to load favorites', e);
+      console.error("Failed to load favorites", e);
     }
   };
 
   const removeFavorite = async (id) => {
     try {
-      const newFavs = favorites.filter(fav => fav.id !== id);
+      const newFavs = favorites.filter((fav) => fav.id !== id);
       setFavorites(newFavs);
-      await AsyncStorage.setItem('wallify_favorites_objs', JSON.stringify(newFavs));
+      await AsyncStorage.setItem(
+        "wallify_favorites_objs",
+        JSON.stringify(newFavs),
+      );
     } catch (e) {
-      console.error('Failed to remove favorite', e);
+      console.error("Failed to remove favorite", e);
     }
   };
 
   const renderItem = ({ item, i }) => {
     const ratio = item.height / item.width;
-    const itemHeight = (Dimensions.get('window').width / 2) * ratio;
+    const itemHeight = (Dimensions.get("window").width / 2) * ratio;
     const height = Math.min(Math.max(itemHeight, 150), 300);
 
     return (
@@ -50,7 +61,11 @@ export default function FavoritesScreen() {
           style={[styles.image, { height }]}
           resizeMode="cover"
         />
-        <TouchableOpacity style={styles.removeButton} onPress={() => removeFavorite(item.id)}>
+
+        <TouchableOpacity
+          style={styles.removeButton}
+          onPress={() => removeFavorite(item.id)}
+        >
           <FontAwesome name="trash" size={20} color="#ff4b5c" />
         </TouchableOpacity>
       </View>
@@ -74,7 +89,9 @@ export default function FavoritesScreen() {
           <View style={styles.emptyContainer}>
             <Text style={styles.emptyIcon}>💔</Text>
             <Text style={styles.emptyText}>No favorites yet.</Text>
-            <Text style={styles.emptySubtext}>Click the heart on any wallpaper to save it here!</Text>
+            <Text style={styles.emptySubtext}>
+              Click the heart on any wallpaper to save it here!
+            </Text>
           </View>
         }
       />
@@ -85,7 +102,7 @@ export default function FavoritesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   header: {
     padding: 20,
@@ -93,38 +110,38 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: "bold",
+    color: "#333",
   },
   masonryContainer: {
     paddingHorizontal: 10,
     paddingBottom: 20,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
   },
   itemContainer: {
     margin: 5,
     borderRadius: 12,
-    overflow: 'hidden',
-    backgroundColor: '#f0f0f0',
-    position: 'relative',
+    overflow: "hidden",
+    backgroundColor: "#f0f0f0",
+    position: "relative",
   },
   image: {
-    width: '100%',
+    width: "100%",
   },
   removeButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 10,
     right: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: 20,
     width: 36,
     height: 36,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   emptyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingTop: 100,
   },
   emptyIcon: {
@@ -133,14 +150,14 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: "bold",
+    color: "#333",
     marginBottom: 10,
   },
   emptySubtext: {
     fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
+    color: "#666",
+    textAlign: "center",
     paddingHorizontal: 40,
   },
 });

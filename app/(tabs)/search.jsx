@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ActivityIndicator, Dimensions, SafeAreaView, Image } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import MasonryGrid from '../../components/MasonryGrid';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+  Dimensions,
+  SafeAreaView,
+  Image,
+} from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import MasonryGrid from "../../components/MasonryGrid";
 
 const UNSPLASH_ACCESS_KEY = "kf0lJ0R9jos4ZBCHPX_9T_46Vpf54L9WkMEyWew4Fkg";
 
 export default function SearchScreen() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [wallpapers, setWallpapers] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +25,9 @@ export default function SearchScreen() {
     if (!query.trim()) return;
     try {
       setLoading(true);
-      const res = await fetch(`https://api.unsplash.com/search/photos?query=${query}&per_page=30&client_id=${UNSPLASH_ACCESS_KEY}`);
+      const res = await fetch(
+        `https://api.unsplash.com/search/photos?query=${query}&per_page=30&client_id=${UNSPLASH_ACCESS_KEY}`,
+      );
       const data = await res.json();
       setWallpapers(data.results);
     } catch (err) {
@@ -27,23 +39,26 @@ export default function SearchScreen() {
 
   const handleFavorite = async (wallpaper) => {
     try {
-      const stored = await AsyncStorage.getItem('wallify_favorites_objs');
+      const stored = await AsyncStorage.getItem("wallify_favorites_objs");
       let favs = stored ? JSON.parse(stored) : [];
-      if (!favs.some(f => f.id === wallpaper.id)) {
+      if (!favs.some((f) => f.id === wallpaper.id)) {
         favs.push(wallpaper);
-        await AsyncStorage.setItem('wallify_favorites_objs', JSON.stringify(favs));
-        alert('Added to Favorites! ❤️');
+        await AsyncStorage.setItem(
+          "wallify_favorites_objs",
+          JSON.stringify(favs),
+        );
+        alert("Added to Favorites! ❤️");
       } else {
-        alert('Already in Favorites!');
+        alert("Already in Favorites!");
       }
     } catch (e) {
-      console.error('Failed to save favorite', e);
+      console.error("Failed to save favorite", e);
     }
   };
 
   const renderItem = ({ item, i }) => {
     const ratio = item.height / item.width;
-    const itemHeight = (Dimensions.get('window').width / 2) * ratio;
+    const itemHeight = (Dimensions.get("window").width / 2) * ratio;
     const height = Math.min(Math.max(itemHeight, 150), 300);
 
     return (
@@ -53,7 +68,11 @@ export default function SearchScreen() {
           style={[styles.image, { height }]}
           resizeMode="cover"
         />
-        <TouchableOpacity style={styles.favButton} onPress={() => handleFavorite(item)}>
+
+        <TouchableOpacity
+          style={styles.favButton}
+          onPress={() => handleFavorite(item)}
+        >
           <FontAwesome name="heart" size={20} color="#ff4b5c" />
         </TouchableOpacity>
       </View>
@@ -73,8 +92,9 @@ export default function SearchScreen() {
             onSubmitEditing={searchWallpapers}
             returnKeyType="search"
           />
+
           {query.length > 0 && (
-            <TouchableOpacity onPress={() => setQuery('')}>
+            <TouchableOpacity onPress={() => setQuery("")}>
               <FontAwesome name="times-circle" size={20} color="#999" />
             </TouchableOpacity>
           )}
@@ -92,8 +112,10 @@ export default function SearchScreen() {
           renderItem={renderItem}
           contentContainerStyle={styles.masonryContainer}
           ListEmptyComponent={
-            wallpapers.length === 0 && query !== '' ? (
-              <Text style={styles.emptyText}>No wallpapers found for "{query}"</Text>
+            wallpapers.length === 0 && query !== "" ? (
+              <Text style={styles.emptyText}>
+                No wallpapers found for "{query}"
+              </Text>
             ) : null
           }
         />
@@ -105,18 +127,18 @@ export default function SearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   searchHeader: {
     padding: 15,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
+    borderBottomColor: "#f0f0f0",
   },
   searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#f5f5f5",
     borderRadius: 25,
     paddingHorizontal: 15,
     paddingVertical: 10,
@@ -125,42 +147,42 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     fontSize: 16,
-    color: '#333',
+    color: "#333",
   },
   loader: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   masonryContainer: {
     paddingHorizontal: 10,
     paddingBottom: 20,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
   },
   itemContainer: {
     margin: 5,
     borderRadius: 12,
-    overflow: 'hidden',
-    backgroundColor: '#f0f0f0',
-    position: 'relative',
+    overflow: "hidden",
+    backgroundColor: "#f0f0f0",
+    position: "relative",
   },
   image: {
-    width: '100%',
+    width: "100%",
   },
   favButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 10,
     right: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
     borderRadius: 20,
     width: 36,
     height: 36,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   emptyText: {
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 50,
     fontSize: 16,
-    color: '#666',
+    color: "#666",
   },
 });

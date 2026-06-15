@@ -1,30 +1,16 @@
-import React from 'react';
-import { Platform, ScrollView, View, StyleSheet } from 'react-native';
-import MasonryList from '@react-native-seoul/masonry-list';
+import React from "react";
+import { Platform, ScrollView, View, StyleSheet } from "react-native";
+import MasonryList from "@react-native-seoul/masonry-list";
 
-interface MasonryGridProps {
-  data: any[];
-  keyExtractor: (item: any) => string;
-  numColumns?: number;
-  showsVerticalScrollIndicator?: boolean;
-  renderItem: (params: { item: any; i: number }) => React.ReactElement;
-  contentContainerStyle?: any;
-  refreshing?: boolean;
-  onRefresh?: () => void;
-  ListEmptyComponent?: React.ReactNode;
-}
-
-export default function MasonryGrid(props: MasonryGridProps) {
-  if (Platform.OS === 'web') {
+export default function MasonryGrid(props) {
+  if (Platform.OS === "web") {
     const { data = [], renderItem, keyExtractor, ListEmptyComponent } = props;
-    
     if (data.length === 0 && ListEmptyComponent) {
       return <View style={styles.emptyWrapper}>{ListEmptyComponent}</View>;
     }
 
-    const col1: any[] = [];
-    const col2: any[] = [];
-    
+    const col1 = [];
+    const col2 = [];
     data.forEach((item, index) => {
       if (index % 2 === 0) {
         col1.push(item);
@@ -34,7 +20,7 @@ export default function MasonryGrid(props: MasonryGridProps) {
     });
 
     return (
-      <ScrollView 
+      <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.webContainer}
       >
@@ -61,19 +47,19 @@ export default function MasonryGrid(props: MasonryGridProps) {
 
 const styles = StyleSheet.create({
   webContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 5,
     paddingBottom: 20,
-    width: '100%',
+    width: "100%",
   },
   webColumn: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: "column",
   },
   emptyWrapper: {
     flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
