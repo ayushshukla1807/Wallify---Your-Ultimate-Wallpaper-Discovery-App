@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ActivityIndicator, Dimensions, TextInput, TouchableOpacity, SafeAreaView, FlatList, Image } from 'react-native';
 import { useRouter } from 'expo-router';
-import MasonryList from '@react-native-seoul/masonry-list';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
+import MasonryGrid from '../../components/MasonryGrid';
 
 const UNSPLASH_ACCESS_KEY = "kf0lJ0R9jos4ZBCHPX_9T_46Vpf54L9WkMEyWew4Fkg";
 
@@ -77,7 +77,7 @@ export default function HomeScreen() {
       {loading ? (
         <ActivityIndicator size="large" color="#ff4b5c" style={styles.loader} />
       ) : (
-        <MasonryList
+        <MasonryGrid
           data={wallpapers}
           keyExtractor={(item) => item.id}
           numColumns={2}

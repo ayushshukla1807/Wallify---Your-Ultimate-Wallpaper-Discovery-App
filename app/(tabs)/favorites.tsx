@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, View, Text, SafeAreaView, Dimensions, TouchableOpacity, Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import MasonryList from '@react-native-seoul/masonry-list';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from 'expo-router';
+import MasonryGrid from '../../components/MasonryGrid';
 
 export default function FavoritesScreen() {
   const [favorites, setFavorites] = useState([]);
@@ -63,7 +63,7 @@ export default function FavoritesScreen() {
         <Text style={styles.title}>Your Favorites</Text>
       </View>
 
-      <MasonryList
+      <MasonryGrid
         data={favorites}
         keyExtractor={(item) => item.id}
         numColumns={2}
