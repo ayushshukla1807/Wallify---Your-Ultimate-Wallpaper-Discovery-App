@@ -19,6 +19,7 @@ const UNSPLASH_ACCESS_KEY = "kf0lJ0R9jos4ZBCHPX_9T_46Vpf54L9WkMEyWew4Fkg";
 export default function HomeScreen() {
   const [wallpapers, setWallpapers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function HomeScreen() {
     try {
       setLoading(true);
       const res = await fetch(
-        `https://api.unsplash.com/photos/random?count=20&client_id=${UNSPLASH_ACCESS_KEY}`,
+        `https://api.unsplash.com/photos/random?count=30&client_id=${UNSPLASH_ACCESS_KEY}`,
       );
       if (!res.ok) throw new Error("Failed to fetch wallpapers");
       const data = await res.json();
@@ -38,6 +39,27 @@ export default function HomeScreen() {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadMoreWallpapers = async () => {
+    if (loadingMore) return;
+    try {
+      setLoadingMore(true);
+      const res = await fetch(
+        `https://api.unsplash.com/photos/random?count=30&client_id=${UNSPLASH_ACCESS_KEY}`,
+      );
+      if (!res.ok) throw new Error("Failed to fetch more wallpapers");
+      const data = await res.json();
+      // Filter out duplicates
+      const newWallpapers = data.filter(
+        (newWp) => !wallpapers.some((wp) => wp.id === newWp.id)
+      );
+      setWallpapers([...wallpapers, ...newWallpapers]);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingMore(false);
     }
   };
 
@@ -92,7 +114,7 @@ export default function HomeScreen() {
         <Text style={styles.subtitle}>Find your perfect aesthetic</Text>
       </View>
 
-      {loading ? (
+      {loading && wallpapers.length === 0 ? (
         <ActivityIndicator size="large" color="#ff4b5c" style={styles.loader} />
       ) : (
         <MasonryGrid
@@ -104,7 +126,11 @@ export default function HomeScreen() {
           refreshing={loading}
           onRefresh={fetchRandomWallpapers}
           contentContainerStyle={styles.masonryContainer}
+          onEndReached={loadMoreWallpapers}
         />
+      )}
+      {loadingMore && (
+        <ActivityIndicator size="small" color="#ff4b5c" style={styles.bottomLoader} />
       )}
     </SafeAreaView>
   );

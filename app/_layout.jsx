@@ -82,7 +82,7 @@ function RootLayoutNav() {
         {/* Mockup Smartphone Container */}
         <View style={styles.phoneFrameContainer}>
           <View style={styles.phoneFrame}>
-            <View style={styles.phoneNotch} />
+            <View style={styles.dynamicIsland} />
             <View style={styles.phoneScreen}>
               {content}
             </View>
@@ -154,10 +154,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   phoneFrame: {
-    width: 375,
-    height: 780,
-    borderRadius: 44,
-    borderWidth: 12,
+    width: 393,
+    height: 852,
+    borderRadius: 55,
+    borderWidth: 14,
     borderColor: '#334155',
     backgroundColor: '#000000',
     overflow: 'hidden',
@@ -168,16 +168,15 @@ const styles = StyleSheet.create({
     elevation: 24,
     position: 'relative',
   },
-  phoneNotch: {
+  dynamicIsland: {
     position: 'absolute',
-    top: 0,
+    top: 12,
     left: '50%',
-    marginLeft: -60,
-    width: 120,
-    height: 25,
-    backgroundColor: '#334155',
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    marginLeft: -62,
+    width: 124,
+    height: 37,
+    backgroundColor: '#000000',
+    borderRadius: 20,
     zIndex: 9999,
   },
   phoneScreen: {

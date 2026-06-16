@@ -4,7 +4,7 @@ import MasonryList from "@react-native-seoul/masonry-list";
 
 export default function MasonryGrid(props) {
   if (Platform.OS === "web") {
-    const { data = [], renderItem, keyExtractor, ListEmptyComponent } = props;
+    const { data = [], renderItem, keyExtractor, ListEmptyComponent, onEndReached } = props;
     if (data.length === 0 && ListEmptyComponent) {
       return <View style={styles.emptyWrapper}>{ListEmptyComponent}</View>;
     }
@@ -19,10 +19,20 @@ export default function MasonryGrid(props) {
       }
     });
 
+    const handleScroll = (event) => {
+      const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+      const isCloseToBottom = layoutMeasurement.height + contentOffset.y >= contentSize.height - 500;
+      if (isCloseToBottom && onEndReached) {
+        onEndReached();
+      }
+    };
+
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.webContainer}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
       >
         <View style={styles.webColumn}>
           {col1.map((item, idx) => (
