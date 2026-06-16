@@ -11,6 +11,7 @@ import {
   Image,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MasonryGrid from "../../components/MasonryGrid";
 
@@ -22,6 +23,7 @@ export default function SearchScreen() {
   const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
+  const router = useRouter();
 
   const searchWallpapers = async () => {
     if (!query.trim()) return;
@@ -90,11 +92,25 @@ export default function SearchScreen() {
 
     return (
       <View style={[styles.itemContainer, { marginTop: i % 2 !== 0 ? 20 : 0 }]}>
-        <Image
-          source={{ uri: item.urls.small }}
-          style={[styles.image, { height }]}
-          resizeMode="cover"
-        />
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() =>
+            router.push({
+              pathname: "/wallpaper",
+              params: {
+                url: item.urls.regular || item.urls.small,
+                id: item.id,
+                altText: item.alt_description || "Wallpaper",
+              },
+            })
+          }
+        >
+          <Image
+            source={{ uri: item.urls.small }}
+            style={[styles.image, { height }]}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.favButton}

@@ -91,11 +91,25 @@ export default function HomeScreen() {
 
     return (
       <View style={[styles.itemContainer, { marginTop: i % 2 !== 0 ? 20 : 0 }]}>
-        <Image
-          source={{ uri: item.urls.small }}
-          style={[styles.image, { height }]}
-          resizeMode="cover"
-        />
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() =>
+            router.push({
+              pathname: "/wallpaper",
+              params: {
+                url: item.urls.regular || item.urls.small,
+                id: item.id,
+                altText: item.alt_description || "Wallpaper",
+              },
+            })
+          }
+        >
+          <Image
+            source={{ uri: item.urls.small }}
+            style={[styles.image, { height }]}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.favButton}

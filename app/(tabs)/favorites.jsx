@@ -10,11 +10,12 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useFocusEffect } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import MasonryGrid from "../../components/MasonryGrid";
 
 export default function FavoritesScreen() {
   const [favorites, setFavorites] = useState([]);
+  const router = useRouter();
 
   useFocusEffect(
     useCallback(() => {
@@ -56,11 +57,25 @@ export default function FavoritesScreen() {
 
     return (
       <View style={[styles.itemContainer, { marginTop: i % 2 !== 0 ? 20 : 0 }]}>
-        <Image
-          source={{ uri: item.urls.small }}
-          style={[styles.image, { height }]}
-          resizeMode="cover"
-        />
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() =>
+            router.push({
+              pathname: "/wallpaper",
+              params: {
+                url: item.urls?.regular || item.urls?.small || item.url,
+                id: item.id,
+                altText: item.alt_description || "Wallpaper",
+              },
+            })
+          }
+        >
+          <Image
+            source={{ uri: item.urls?.small || item.url }}
+            style={[styles.image, { height }]}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.removeButton}
