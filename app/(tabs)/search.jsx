@@ -20,20 +20,47 @@ export default function SearchScreen() {
   const [query, setQuery] = useState("");
   const [wallpapers, setWallpapers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [page, setPage] = useState(1);
 
   const searchWallpapers = async () => {
     if (!query.trim()) return;
     try {
       setLoading(true);
+      setPage(1);
       const res = await fetch(
-        `https://api.unsplash.com/search/photos?query=${query}&per_page=30&client_id=${UNSPLASH_ACCESS_KEY}`,
+        `https://api.unsplash.com/search/photos?query=${query}&page=1&per_page=30&client_id=${UNSPLASH_ACCESS_KEY}`,
       );
       const data = await res.json();
-      setWallpapers(data.results);
+      setWallpapers(data.results || []);
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadMoreWallpapers = async () => {
+    if (loadingMore || !query.trim() || wallpapers.length === 0) return;
+    try {
+      setLoadingMore(true);
+      const nextPage = page + 1;
+      const res = await fetch(
+        `https://api.unsplash.com/search/photos?query=${query}&page=${nextPage}&per_page=30&client_id=${UNSPLASH_ACCESS_KEY}`,
+      );
+      const data = await res.json();
+      if (data.results && data.results.length > 0) {
+        // Filter out duplicates
+        const newWallpapers = data.results.filter(
+          (newWp) => !wallpapers.some((wp) => wp.id === newWp.id)
+        );
+        setWallpapers([...wallpapers, ...newWallpapers]);
+        setPage(nextPage);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingMore(false);
     }
   };
 
@@ -83,7 +110,9 @@ export default function SearchScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.searchHeader}>
         <View style={styles.searchBar}>
-          <FontAwesome name="search" size={20} color="#999" />
+          <TouchableOpacity onPress={searchWallpapers}>
+            <FontAwesome name="search" size={20} color="#999" />
+          </TouchableOpacity>
           <TextInput
             style={styles.searchInput}
             placeholder="Search wallpapers..."
@@ -94,14 +123,14 @@ export default function SearchScreen() {
           />
 
           {query.length > 0 && (
-            <TouchableOpacity onPress={() => setQuery("")}>
+            <TouchableOpacity onPress={() => { setQuery(""); setWallpapers([]); }}>
               <FontAwesome name="times-circle" size={20} color="#999" />
             </TouchableOpacity>
           )}
         </View>
       </View>
 
-      {loading ? (
+      {loading && wallpapers.length === 0 ? (
         <ActivityIndicator size="large" color="#ff4b5c" style={styles.loader} />
       ) : (
         <MasonryGrid
@@ -111,14 +140,18 @@ export default function SearchScreen() {
           showsVerticalScrollIndicator={false}
           renderItem={renderItem}
           contentContainerStyle={styles.masonryContainer}
+          onEndReached={loadMoreWallpapers}
           ListEmptyComponent={
-            wallpapers.length === 0 && query !== "" ? (
+            wallpapers.length === 0 && query !== "" && !loading ? (
               <Text style={styles.emptyText}>
                 No wallpapers found for "{query}"
               </Text>
             ) : null
           }
         />
+      )}
+      {loadingMore && (
+        <ActivityIndicator size="small" color="#ff4b5c" style={styles.bottomLoader} />
       )}
     </SafeAreaView>
   );
@@ -152,6 +185,9 @@ const styles = StyleSheet.create({
   loader: {
     flex: 1,
     justifyContent: "center",
+  },
+  bottomLoader: {
+    paddingVertical: 20,
   },
   masonryContainer: {
     paddingHorizontal: 10,
